@@ -4,6 +4,7 @@
 
 #include "bsp.hpp"
 #include "fader.hpp"
+#include "touch.hpp"
 
 
 
@@ -15,8 +16,6 @@ fader_t fader1 = {
     .analog_pin = FADER1_POT_PIN,
 };
 
-// CapacitiveSensor   cs_1_0 = CapacitiveSensor(1, 0);
-
 
 void setup(void) {
     // initialize LED digital pin as an output.
@@ -26,23 +25,21 @@ void setup(void) {
 
     init_all_pins();
     init_pwm();
+    init_touch();
 
     pinMode(A0, INPUT);
-
-    // cs_1_0.set_CS_AutocaL_Millis(0xFFFFFFFF);
-    // cs_1_0.set_CS_Timeout_Millis(20);
 }
 
 
 void loop(void) {
-#if 0
+#if 1
     long start = millis();
-    long total1 = cs_1_0.capacitiveSensor(10);
+    long total1 = get_touch(FADER1_TOUCH_PIN);
 
-    Serial.print(millis() - start);        // check on performance in milliseconds
-    Serial.print("\t");                    // tab character for debug window spacing
+    // Serial.print(millis() - start);        // check on performance in milliseconds
+    // Serial.print("\t");                    // tab character for debug window spacing
 
-    Serial.println(total1);                // print sensor output 1
+    // Serial.println(total1);                // print sensor output 1
 
     // delay(100);                             // arbitrary delay to limit data to serial port
 #endif
