@@ -10,12 +10,22 @@ typedef struct {
 	const int touch_pin;
 	const int analog_pin;
 
-	int16_t last_command;
+	const uint8_t midi_control;
+
+	int16_t analog_min_value;
+	int16_t analog_max_value;
+	int16_t last_target;
+
+	bool pressed;
+	uint16_t target;
+	uint8_t midi_value;
+	uint8_t last_midi_value;
 
 } fader_t;
 
 
-extern void process_fader(fader_t &fader, uint16_t target);
+extern void calibrate_fader(fader_t &fader);
+extern void process_fader(fader_t &fader);
 
 
 

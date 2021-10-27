@@ -1,11 +1,11 @@
 #include <Arduino.h>
 #include <stdint.h>
 #include <MIDI.h>
+#include <Bounce.h>  // Bounce library makes button change detection easy
 
 #include "bsp.hpp"
 #include "fader.hpp"
 #include "touch.hpp"
-
 
 
 fader_t fader1 = {
@@ -14,34 +14,47 @@ fader_t fader1 = {
     .speed_pin = FADER1_SPEED_PIN,
     .touch_pin = FADER1_TOUCH_PIN,
     .analog_pin = FADER1_POT_PIN,
+
+    .midi_control = 7,
+
+    .analog_min_value = 0,
+    .analog_max_value = 1023,
 };
+
+
+void myControlChange(byte channel, byte control, byte value) {
+    if(channel != 1) { return; }
+
+    if(fader1.midi_control == control) {
+        Serial.print("IN:");
+        Serial.println(value);
+        fader1.target = map(value, 0, 127, 0, 1023);
+    }
+}
 
 
 void setup(void) {
     // initialize LED digital pin as an output.
     pinMode(LED_BUILTIN, OUTPUT);
     Serial.begin(115200);
-    Serial.println("Init Done");
 
     init_all_pins();
     init_pwm();
     init_touch();
 
     pinMode(A0, INPUT);
+
+    calibrate_fader(fader1);
+
+    usbMIDI.setHandleControlChange(myControlChange);
+
+    Serial.println("Init Done");
 }
 
 
 void loop(void) {
 #if 1
-    long start = millis();
-    long total1 = get_touch(FADER1_TOUCH_PIN);
-
-    // Serial.print(millis() - start);        // check on performance in milliseconds
-    // Serial.print("\t");                    // tab character for debug window spacing
-
-    // Serial.println(total1);                // print sensor output 1
-
-    // delay(100);                             // arbitrary delay to limit data to serial port
+    usbMIDI.read();
 #endif
 
 #if 1
@@ -49,8 +62,19 @@ void loop(void) {
     static long last_run_time = 0;
 
     if(current_time - last_run_time > 10) {
-        int target = analogRead(A0);
-        process_fader(fader1, target);
+        // fader1.target = analogRead(A0);
+
+        process_fader(fader1);
+
+        if(fader1.pressed) {
+            pinMode(LED_BUILTIN, HIGH);
+            if(fader1.midi_value != fader1.last_midi_value) {
+                usbMIDI.sendControlChange(fader1.midi_control, fader1.midi_value, 1);
+                fader1.target = map(fader1.midi_value, 0, 127, 0, 1023);
+                fader1.last_midi_value = fader1.midi_value;
+            }
+        }
+        else { pinMode(LED_BUILTIN, LOW); }
 
         last_run_time = current_time;
     }
