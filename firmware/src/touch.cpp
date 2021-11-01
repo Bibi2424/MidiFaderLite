@@ -33,7 +33,7 @@
     }
 
 
-    static long get_touch(int pin) {
+    extern long get_touch(int pin) {
         #ifdef USE_FADER1
             if(pin == FADER1_TOUCH_PIN) {
                 return touch1.capacitiveSensor(TOUCH_DEFAULT_SAMPLE);
@@ -50,10 +50,6 @@
             }
         #endif
         return -10;
-    }
-#else
-    static inline long get_touch(int pin) {
-        return touchRead(pin);
     }
 #endif
 

@@ -55,13 +55,11 @@ void setup(void) {
 void loop(void) {
 #if 1
     usbMIDI.read();
-#endif
 
-#if 1
     long current_time = millis();
     static long last_run_time = 0;
 
-    if(current_time - last_run_time > 10) {
+    if(current_time - last_run_time > 5) {
         // fader1.target = analogRead(A0);
 
         process_fader(fader1);
@@ -81,7 +79,17 @@ void loop(void) {
 #endif
 
 #if 0
-    //! Usefull to discover the OUTPUT_DEAD_ZONE
+    //! NOTE: Usefull to verify the capacitve touch
+
+    long touch = get_touch(23);
+    Serial.print("Touch: ");
+    Serial.println(touch);
+
+    delay(100);
+#endif
+
+#if 0
+    //! NOTE: Usefull to discover the OUTPUT_DEAD_ZONE
 
     int target = analogRead(A0);
     // target = map(target, 0, 1023, -1023, 1023);
