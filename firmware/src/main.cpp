@@ -4,9 +4,11 @@
 #include <Encoder.h>
 #include <Bounce.h>  // Bounce library makes button change detection easy
 
+#include "global.hpp"
 #include "bsp.hpp"
 #include "fader.hpp"
 #include "touch.hpp"
+#include "potentiometer.hpp"
 
 #ifdef USE_FADER1
 fader_t fader1 = {
@@ -50,6 +52,19 @@ fader_t fader3 = {
     .analog_max_value = 1023,
 };
 #endif
+
+potentiometer_t pot1 = {
+    .analog_pin = POT1_PIN,
+    .midi_control = 20
+};
+potentiometer_t pot2 = {
+    .analog_pin = POT2_PIN,
+    .midi_control = 21
+};
+potentiometer_t pot3 = {
+    .analog_pin = POT3_PIN,
+    .midi_control = 22
+};
 
 // Encoder1 myEnc(ENCODER1_PIN_A, ENCODER1_PIN_B);
 // Encoder2 myEnc(ENCODER2_PIN_A, ENCODER2_PIN_B);
@@ -126,7 +141,7 @@ void loop(void) {
         process_fader(fader1);
         if(fader1.pressed) {
             if(fader1.midi_value != fader1.last_midi_value) {
-                usbMIDI.sendControlChange(fader1.midi_control, fader1.midi_value, 1);
+                usbMIDI.sendControlChange(fader1.midi_control, fader1.midi_value, MIDI_CHANNEL);
                 fader1.target = map(fader1.midi_value, 0, 127, 0, 1023);
                 fader1.last_midi_value = fader1.midi_value;
             }
@@ -136,7 +151,7 @@ void loop(void) {
         process_fader(fader2);
         if(fader2.pressed) {
             if(fader2.midi_value != fader2.last_midi_value) {
-                usbMIDI.sendControlChange(fader2.midi_control, fader2.midi_value, 1);
+                usbMIDI.sendControlChange(fader2.midi_control, fader2.midi_value, MIDI_CHANNEL);
                 fader2.target = map(fader2.midi_value, 0, 127, 0, 1023);
                 fader2.last_midi_value = fader2.midi_value;
             }
@@ -146,7 +161,7 @@ void loop(void) {
         process_fader(fader3);
         if(fader3.pressed) {
             if(fader3.midi_value != fader3.last_midi_value) {
-                usbMIDI.sendControlChange(fader3.midi_control, fader3.midi_value, 1);
+                usbMIDI.sendControlChange(fader3.midi_control, fader3.midi_value, MIDI_CHANNEL);
                 fader3.target = map(fader3.midi_value, 0, 127, 0, 1023);
                 fader3.last_midi_value = fader3.midi_value;
             }
@@ -158,33 +173,30 @@ void loop(void) {
 
 #endif
 
-#if 0
+#if 1
     static long pots_last_run_time = 0;
 
     if(current_time - pots_last_run_time > 10) {
-        int pot;
-        uint8_t midi_value;
+        potentiometer_get(pot1);
+        potentiometer_get(pot2);
+        potentiometer_get(pot3);
+        potentiometer_send(pot1);
+        potentiometer_send(pot2);
+        potentiometer_send(pot3);
 
-        pot = analogRead(POT1_PIN);
-        midi_value = map(pot, 0, 1023, 0, 127);
-        usbMIDI.sendControlChange(20, midi_value, 1);
-        pot = analogRead(POT2_PIN);
-        midi_value = map(pot, 0, 1023, 0, 127);
-        usbMIDI.sendControlChange(21, midi_value, 1);
-        pot = analogRead(POT3_PIN);
-        midi_value = map(pot, 0, 1023, 0, 127);
-        usbMIDI.sendControlChange(22, midi_value, 1);
+        pots_last_run_time = current_time;
     }
 #endif
 
 #if 0
+    static long touch_last_run_time = 0;
     //! NOTE: Usefull to verify the capacitve touch
-    long touch1 = get_touch(FADER1_TOUCH_PIN);
-    long touch2 = get_touch(FADER2_TOUCH_PIN);
-    long touch3 = get_touch(FADER3_TOUCH_PIN);
-    Serial.printf("Touch: %u %u %u\n", touch1, touch2, touch3);
-
-    delay(100);
+    if(current_time - touch_last_run_time > 100) {
+        long touch1 = get_touch(FADER1_TOUCH_PIN);
+        long touch2 = get_touch(FADER2_TOUCH_PIN);
+        long touch3 = get_touch(FADER3_TOUCH_PIN);
+        Serial.printf("Touch: %u %u %u\n", touch1, touch2, touch3);
+    }
 #endif
 
 #if 0
