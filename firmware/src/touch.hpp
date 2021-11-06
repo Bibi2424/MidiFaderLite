@@ -6,7 +6,7 @@
 
 #include "bsp.hpp"
 
-#define PRESSED_TOUCH_THRESHOLD	450
+#define PRESSED_TOUCH_THRESHOLD	3000
 
 
 #if USE_HW_TOUCH == false

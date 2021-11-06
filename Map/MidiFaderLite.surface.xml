@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ControlSurface>
+	<Controls>
+		<Control name="controlb0001" title="Fader1" type="fader" options="receive transmit nofeedback public">
+			<MidiMessage status="#B0" channel="0" address="#1"/>
+		</Control>
+		<Control name="controlb0007" title="Fader2" type="fader" options="receive transmit nofeedback public">
+			<MidiMessage status="#B0" channel="0" address="#7"/>
+		</Control>
+		<Control name="controlb000b" title="Fader3" type="fader" options="receive transmit nofeedback public">
+			<MidiMessage status="#B0" channel="0" address="#B"/>
+		</Control>
+		<Control name="controlb0014" title="Pot1" type="knob" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#14"/>
+		</Control>
+		<Control name="controlb0015" title="Pot2" type="knob" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#15"/>
+		</Control>
+		<Control name="controlb0016" title="Pot3" type="knob" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#16"/>
+		</Control>
+		<Control name="controlb0020" title="Enc1" type="relative" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#20"/>
+		</Control>
+	</Controls>
+</ControlSurface>
