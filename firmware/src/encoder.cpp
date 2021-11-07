@@ -7,7 +7,6 @@
 #include "bsp.hpp"
 
 
-
 extern uint16_t encoder_get(encoder_t &enc) {
 	long new_pos = enc.object.read();
 	if(new_pos != enc.position) {
@@ -23,7 +22,7 @@ extern uint16_t encoder_get(encoder_t &enc) {
 
 extern void encoder_send(encoder_t &enc) {
 	if(enc.diff != 0) {
-		enc.diff *= 4;*
+		enc.diff *= 4;
 		if(enc.diff > 63) { enc.diff = 63; }
 		if(enc.diff < -63) { enc.diff = -63; }
 		enc.diff += 64;

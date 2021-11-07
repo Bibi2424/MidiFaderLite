@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <stdbool.h>
+#include <MIDI.h>
 
 #include "global.hpp"
 #include "potentiometer.hpp"

@@ -10,6 +10,7 @@
 #include "touch.hpp"
 #include "encoder.hpp"
 #include "potentiometer.hpp"
+#include "button.hpp"
 
 
 fader_t fader1 = {
@@ -73,6 +74,15 @@ encoder_t encoder2 = {
     .midi_control = 0x14,
 };
 
+button_t b1 = { .pin = 25, .midi_control = 0x18 };
+button_t b2 = { .pin = 26, .midi_control = 0x19 };
+button_t b3 = { .pin = 27, .midi_control = 0x1A };
+button_t b4 = { .pin = 28, .midi_control = 0x1B };
+button_t b5 = { .pin = 29, .midi_control = 0x1C };
+button_t b6 = { .pin = 30, .midi_control = 0x1D };
+button_t b7 = { .pin = 31, .midi_control = 0x1E };
+button_t b8 = { .pin = 32, .midi_control = 0x1F };
+
 
 void myControlChange(byte channel, byte control, byte value) {
     // Serial.printf("IN[%u-%u]: %u\n", channel, control, value);
@@ -111,6 +121,15 @@ void setup(void) {
     potentiometer_init(pot1);
     potentiometer_init(pot2);
     potentiometer_init(pot3);
+
+    button_init(b1);
+    button_init(b2);
+    button_init(b3);
+    button_init(b4);
+    button_init(b5);
+    button_init(b6);
+    button_init(b7);
+    button_init(b8);
 
     usbMIDI.setHandleControlChange(myControlChange);
 
@@ -168,6 +187,31 @@ void loop(void) {
         encoder_send(encoder2);
 
         encs_last_run_time = current_time;
+    }
+#endif
+
+#if 1
+    static long buttons_last_run_time = 0;
+
+    if(current_time - buttons_last_run_time > 50) {
+        button_get(b1);
+        button_send(b1, false);
+        button_get(b2);
+        button_send(b2, false);
+        button_get(b3);
+        button_send(b3, false);
+        button_get(b4);
+        button_send(b4, false);
+        button_get(b5);
+        button_send(b5, false);
+        button_get(b6);
+        button_send(b6, false);
+        button_get(b7);
+        button_send(b7, false);
+        button_get(b8);
+        button_send(b8, false);
+
+        buttons_last_run_time = current_time;
     }
 #endif
 

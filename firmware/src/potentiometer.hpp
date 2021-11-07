@@ -1,8 +1,6 @@
 #ifndef POTENTIOMETER_H
 #define POTENTIOMETER_H
 
-#include <MIDI.h>
-
 
 typedef struct {
     const int analog_pin;
