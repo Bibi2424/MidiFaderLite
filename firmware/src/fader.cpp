@@ -1,13 +1,16 @@
 #include <Arduino.h>
+#include <MIDI.h>
+#include <stdbool.h>
 
+#include "global.hpp"
 #include "fader.hpp"
 #include "bsp.hpp"
 #include "touch.hpp"
 
 
-#define INPUT_DEAD_ZONE		6
-#define OUTPUT_DEAD_ZONE	725
-#define FILTER  			9
+#define INPUT_DEAD_ZONE     8
+#define OUTPUT_DEAD_ZONE    750
+#define FILTER              9
 
 
 static void set_motor_speed(fader_t &fader, int16_t speed) {
@@ -28,12 +31,13 @@ static void set_motor_speed(fader_t &fader, int16_t speed) {
         //! Free running
         digitalWrite(fader.dir_A_pin, LOW);
         digitalWrite(fader.dir_B_pin, LOW);
+        set_pwm(fader.speed_pin, 0);
         pinMode(fader.speed_pin, OUTPUT);
         digitalWrite(fader.speed_pin, LOW);
-        // set_pwm(fader.speed_pin, 0);
         //! Brake
-        // digitalWrite(fader.dir_A_pin, HIGH);
-        // digitalWrite(fader.dir_B_pin, HIGH);
+        // digitalWrite(fader.dir_A_pin, LOW);
+        // digitalWrite(fader.dir_B_pin, LOW);
+        // set_pwm(fader.speed_pin, 0);
         // pinMode(fader.speed_pin, OUTPUT);
         // digitalWrite(fader.speed_pin, HIGH);
     }
@@ -41,7 +45,7 @@ static void set_motor_speed(fader_t &fader, int16_t speed) {
 
 
 //! Make a unified calibration function
-extern void calibrate_fader(fader_t &fader) {
+static void fader_calibrate(fader_t &fader) {
     set_motor_speed(fader, -900);
     delay(500);
     fader.analog_min_value = analogRead(fader.analog_pin);
@@ -53,7 +57,19 @@ extern void calibrate_fader(fader_t &fader) {
 }
 
 
-extern void process_fader(fader_t &fader) {
+extern void fader_init(fader_t &fader) {
+#ifndef WITHOUT_VMOT
+    fader_calibrate(fader);
+#else
+    fader.analog_min_value = 0;
+    fader.analog_max_value = 1023;
+#endif
+    fader_process(fader);
+    fader_send(fader, true);
+}
+
+
+extern void fader_process(fader_t &fader) {
     int current_pos = analogRead(fader.analog_pin);
     fader.midi_value = map(current_pos, fader.analog_min_value, fader.analog_max_value, 0, 127);
 
@@ -81,16 +97,25 @@ extern void process_fader(fader_t &fader) {
         command = 0;
     }
 
-
     command = (FILTER * command + (10 - FILTER) * fader.last_target) / 10;
-    // Serial.print("Loop: ");
-    // Serial.print(target);
-    // Serial.print(" - ");
-    // Serial.print(current_pos);
-    // Serial.print(" - ");
-    // Serial.println(command);
+    // Serial.printf("Fader[%u]: %u - %u - %u\n", fader.midi_control, fader.target, current_pos, command);
 
     set_motor_speed(fader, command);
 
     fader.last_target = fader.target;
+}
+
+
+extern void fader_send(fader_t &fader, bool force) {
+    if(fader.pressed || force == true) {
+        if(fader.midi_value != fader.last_midi_value || force == true) {
+            usbMIDI.sendControlChange(fader.midi_control, fader.midi_value, MIDI_CHANNEL);
+            fader.target = map(fader.midi_value, 0, 127, 0, 1023);
+            fader.last_midi_value = fader.midi_value;
+        }
+    }
+    if(fader.pressed != fader.last_pressed || force == true) {
+        usbMIDI.sendControlChange(fader.midi_control + 0x70, fader.pressed?127:0, MIDI_CHANNEL+1);
+        fader.last_pressed = fader.pressed;
+    }
 }

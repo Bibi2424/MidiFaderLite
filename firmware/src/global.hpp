@@ -4,5 +4,7 @@
 
 #define MIDI_CHANNEL	1
 
+#define WITHOUT_VMOT
+
 
 #endif

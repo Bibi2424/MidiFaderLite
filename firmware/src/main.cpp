@@ -8,9 +8,10 @@
 #include "bsp.hpp"
 #include "fader.hpp"
 #include "touch.hpp"
+#include "encoder.hpp"
 #include "potentiometer.hpp"
 
-#ifdef USE_FADER1
+
 fader_t fader1 = {
     .dir_A_pin = FADER1_DIR_A_PIN,
     .dir_B_pin = FADER1_DIR_B_PIN,
@@ -23,8 +24,6 @@ fader_t fader1 = {
     .analog_min_value = 0,
     .analog_max_value = 1023,
 };
-#endif
-#ifdef USE_FADER2
 fader_t fader2 = {
     .dir_A_pin = FADER2_DIR_A_PIN,
     .dir_B_pin = FADER2_DIR_B_PIN,
@@ -37,8 +36,6 @@ fader_t fader2 = {
     .analog_min_value = 0,
     .analog_max_value = 1023,
 };
-#endif
-#ifdef USE_FADER3
 fader_t fader3 = {
     .dir_A_pin = FADER3_DIR_A_PIN,
     .dir_B_pin = FADER3_DIR_B_PIN,
@@ -51,51 +48,52 @@ fader_t fader3 = {
     .analog_min_value = 0,
     .analog_max_value = 1023,
 };
-#endif
 
 potentiometer_t pot1 = {
     .analog_pin = POT1_PIN,
-    .midi_control = 20
+    .midi_control = 0x10
 };
 potentiometer_t pot2 = {
     .analog_pin = POT2_PIN,
-    .midi_control = 21
+    .midi_control = 0x11
 };
 potentiometer_t pot3 = {
     .analog_pin = POT3_PIN,
-    .midi_control = 22
+    .midi_control = 0x12
 };
 
-// Encoder1 myEnc(ENCODER1_PIN_A, ENCODER1_PIN_B);
-// Encoder2 myEnc(ENCODER2_PIN_A, ENCODER2_PIN_B);
+Encoder enc1(ENCODER1_PIN_A, ENCODER1_PIN_B);
+encoder_t encoder1 = {
+    .object = enc1,
+    .midi_control = 0x13,
+};
+Encoder enc2(ENCODER2_PIN_A, ENCODER2_PIN_B);
+encoder_t encoder2 = {
+    .object = enc2,
+    .midi_control = 0x14,
+};
 
 
 void myControlChange(byte channel, byte control, byte value) {
+    // Serial.printf("IN[%u-%u]: %u\n", channel, control, value);
     if(channel != 1) { return; }
 
-#ifdef USE_FADER1
     if(fader1.midi_control == control) {
         Serial.printf("IN:%u\n", value);
         fader1.target = map(value, 0, 127, 0, 1023);
     }
-#endif
-#ifdef USE_FADER2
     if(fader2.midi_control == control) {
         Serial.printf("IN:%u\n", value);
         fader2.target = map(value, 0, 127, 0, 1023);
     }
-#endif
-#ifdef USE_FADER3
     if(fader3.midi_control == control) {
         Serial.printf("IN:%u\n", value);
         fader3.target = map(value, 0, 127, 0, 1023);
     }
-#endif
 }
 
 
 void setup(void) {
-
     asm(".global _printf_float");
 
     // initialize LED digital pin as an output.
@@ -106,17 +104,13 @@ void setup(void) {
     init_pwm();
     init_touch();
 
-    // pinMode(A0, INPUT);
+    fader_init(fader1);
+    fader_init(fader2);
+    fader_init(fader3);
 
-#ifdef USE_FADER1
-    calibrate_fader(fader1);
-#endif
-#ifdef USE_FADER2
-    calibrate_fader(fader2);
-#endif
-#ifdef USE_FADER3
-    calibrate_fader(fader3);
-#endif
+    potentiometer_init(pot1);
+    potentiometer_init(pot2);
+    potentiometer_init(pot3);
 
     usbMIDI.setHandleControlChange(myControlChange);
 
@@ -135,40 +129,16 @@ void loop(void) {
     static long fader_last_run_time = 0;
 
     if(current_time - fader_last_run_time > 5) {
-        // fader1.target = analogRead(A0);
 
-    #ifdef USE_FADER1
-        process_fader(fader1);
-        if(fader1.pressed) {
-            if(fader1.midi_value != fader1.last_midi_value) {
-                usbMIDI.sendControlChange(fader1.midi_control, fader1.midi_value, MIDI_CHANNEL);
-                fader1.target = map(fader1.midi_value, 0, 127, 0, 1023);
-                fader1.last_midi_value = fader1.midi_value;
-            }
-        }
-    #endif
-    #ifdef USE_FADER2
-        process_fader(fader2);
-        if(fader2.pressed) {
-            if(fader2.midi_value != fader2.last_midi_value) {
-                usbMIDI.sendControlChange(fader2.midi_control, fader2.midi_value, MIDI_CHANNEL);
-                fader2.target = map(fader2.midi_value, 0, 127, 0, 1023);
-                fader2.last_midi_value = fader2.midi_value;
-            }
-        }
-    #endif
-    #ifdef USE_FADER3
-        process_fader(fader3);
-        if(fader3.pressed) {
-            if(fader3.midi_value != fader3.last_midi_value) {
-                usbMIDI.sendControlChange(fader3.midi_control, fader3.midi_value, MIDI_CHANNEL);
-                fader3.target = map(fader3.midi_value, 0, 127, 0, 1023);
-                fader3.last_midi_value = fader3.midi_value;
-            }
-        }
-    #endif
+        fader_process(fader1);
+        fader_send(fader1, false);
+        fader_process(fader2);
+        fader_send(fader2, false);
+        fader_process(fader3);
+        fader_send(fader3, false);
 
-        last_run_time = current_time;
+        // Serial.printf("fads: %u - %u - %u\n", fader1.midi_value, fader2.midi_value, fader3.midi_value);
+        fader_last_run_time = current_time;
     }
 
 #endif
@@ -176,15 +146,28 @@ void loop(void) {
 #if 1
     static long pots_last_run_time = 0;
 
-    if(current_time - pots_last_run_time > 10) {
+    if(current_time - pots_last_run_time > 50) {
         potentiometer_get(pot1);
+        potentiometer_send(pot1, false);
         potentiometer_get(pot2);
+        potentiometer_send(pot2, false);
         potentiometer_get(pot3);
-        potentiometer_send(pot1);
-        potentiometer_send(pot2);
-        potentiometer_send(pot3);
+        potentiometer_send(pot3, false);
 
         pots_last_run_time = current_time;
+    }
+#endif
+
+#if 1
+    static long encs_last_run_time = 0;
+
+    if(current_time - encs_last_run_time > 5) {
+        encoder_get(encoder1);
+        encoder_send(encoder1);
+        encoder_get(encoder2);
+        encoder_send(encoder2);
+
+        encs_last_run_time = current_time;
     }
 #endif
 
@@ -205,16 +188,6 @@ void loop(void) {
     int slide2 = analogRead(FADER2_POT_PIN);
     int slide3 = analogRead(FADER3_POT_PIN);
     Serial.printf("Slider: %u %u %u\n", slide1, slide2, slide3);
-
-    delay(100);
-#endif
-
-#if 0
-    //! NOTE: Usefull to verify the pots
-    int pot1 = analogRead(POT1_PIN);
-    int pot2 = analogRead(POT2_PIN);
-    int pot3 = analogRead(POT3_PIN);
-    Serial.printf("Pots: %u %u %u\n", pot1, pot2, pot3);
 
     delay(100);
 #endif
