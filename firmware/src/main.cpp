@@ -145,19 +145,24 @@ void loop(void) {
 #endif
 
 #if 1
-    static long fader_last_run_time = 0;
+    static long fader_last_process_time = 0;
+    static long fader_last_send_time = 0;
 
-    if(current_time - fader_last_run_time > 5) {
+    if(current_time - fader_last_process_time > 5) {
 
         fader_process(fader1);
-        fader_send(fader1, false);
         fader_process(fader2);
-        fader_send(fader2, false);
         fader_process(fader3);
-        fader_send(fader3, false);
 
         // Serial.printf("fads: %u - %u - %u\n", fader1.midi_value, fader2.midi_value, fader3.midi_value);
-        fader_last_run_time = current_time;
+        fader_last_process_time = current_time;
+    }
+
+    if(current_time - fader_last_send_time > 50) {
+        fader_send(fader1, false);
+        fader_send(fader2, false);
+        fader_send(fader3, false);
+        fader_last_send_time = current_time;
     }
 
 #endif
@@ -178,15 +183,20 @@ void loop(void) {
 #endif
 
 #if 1
-    static long encs_last_run_time = 0;
+    static long encs_last_process_time = 0;
+    static long encs_last_send_time = 0;
 
-    if(current_time - encs_last_run_time > 5) {
+    if(current_time - encs_last_process_time > 5) {
         encoder_get(encoder1);
-        encoder_send(encoder1);
         encoder_get(encoder2);
+
+        encs_last_process_time = current_time;
+    }
+    if(current_time - encs_last_send_time > 50) {
+        encoder_send(encoder1);
         encoder_send(encoder2);
 
-        encs_last_run_time = current_time;
+        encs_last_send_time = current_time;
     }
 #endif
 
