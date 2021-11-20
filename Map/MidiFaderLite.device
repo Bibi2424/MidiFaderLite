@@ -1,0 +1,3 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DeviceDefinition classID="{E65178E6-814B-4773-A824-C74BA004D799}" name="MidiFaderLite" category="Surface" nativeCode="ControlSurfaceDevice"
+                  vendor="Bibi&apos;s Lab" surfaceFile="MidiFaderLite.surface.xml"/>

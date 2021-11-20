@@ -1,26 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ControlSurface>
 	<Controls>
-		<Control name="controlb0001" title="Fader1" type="fader" options="receive transmit nofeedback public">
+		<Control name="Fader[0]" title="[F1]" type="fader" options="receive transmit nofeedback public">
 			<MidiMessage status="#B0" channel="0" address="#1"/>
 		</Control>
-		<Control name="controlb0007" title="Fader2" type="fader" options="receive transmit nofeedback public">
+		<Control name="Fader[1]" title="[F2]" type="fader" options="receive transmit nofeedback public">
 			<MidiMessage status="#B0" channel="0" address="#7"/>
 		</Control>
-		<Control name="controlb000b" title="Fader3" type="fader" options="receive transmit nofeedback public">
+		<Control name="Fader[2]" title="[F3]" type="fader" options="receive transmit nofeedback public">
 			<MidiMessage status="#B0" channel="0" address="#B"/>
 		</Control>
-		<Control name="controlb0014" title="Pot1" type="knob" options="receive public">
+		<Control name="Touch[0]" title="[T1]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="1" address="#71"/>
+		</Control>
+		<Control name="Touch[1]" title="[T2]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="1" address="#77"/>
+		</Control>
+		<Control name="Touch[2]" title="[T3]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="1" address="#7B"/>
+		</Control>
+		<Control name="Knob[0]" title="[K1]" type="knob" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#10"/>
+		</Control>
+		<Control name="Knob[1]" title="[K2]" type="knob" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#11"/>
+		</Control>
+		<Control name="Knob[2]" title="[K3]" type="knob" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#12"/>
+		</Control>
+		<Control name="Encoder[0]" title="[E1]" type="relative" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#13"/>
+		</Control>
+		<Control name="Encoder[1]" title="[E2]" type="relative" options="receive public">
 			<MidiMessage status="#B0" channel="0" address="#14"/>
 		</Control>
-		<Control name="controlb0015" title="Pot2" type="knob" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#15"/>
+		<Control name="Button[0]" title="[B1]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#1B"/>
 		</Control>
-		<Control name="controlb0016" title="Pot3" type="knob" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#16"/>
+		<Control name="Button[1]" title="[B2]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#1A"/>
 		</Control>
-		<Control name="controlb0020" title="Enc1" type="relative" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#20"/>
+		<Control name="Button[2]" title="[B3]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#19"/>
+		</Control>
+		<Control name="Button[3]" title="[B4]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#18"/>
+		</Control>
+		<Control name="Button[4]" title="[B5]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#1D"/>
+		</Control>
+		<Control name="Button[4]" title="[B6]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#1C"/>
+		</Control>
+		<Control name="Button[5]" title="[B7]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#1E"/>
+		</Control>
+		<Control name="Button[6]" title="[B8]" type="button" options="receive public">
+			<MidiMessage status="#B0" channel="0" address="#1F"/>
 		</Control>
 	</Controls>
 </ControlSurface>
