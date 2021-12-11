@@ -10,15 +10,6 @@
 		<Control name="Fader[2]" title="[F3]" type="fader" options="receive transmit nofeedback public">
 			<MidiMessage status="#B0" channel="0" address="#B"/>
 		</Control>
-		<Control name="Touch[0]" title="[T1]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="1" address="#71"/>
-		</Control>
-		<Control name="Touch[1]" title="[T2]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="1" address="#77"/>
-		</Control>
-		<Control name="Touch[2]" title="[T3]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="1" address="#7B"/>
-		</Control>
 		<Control name="Knob[0]" title="[K1]" type="knob" options="receive public">
 			<MidiMessage status="#B0" channel="0" address="#10"/>
 		</Control>
