@@ -6,8 +6,9 @@ typedef struct {
     const int analog_pin;
     const uint8_t midi_control;
 
+    uint16_t raw_value;
+    uint16_t last_value;
     uint8_t midi_value;
-    uint8_t last_midi_value;
 } potentiometer_t;
 
 

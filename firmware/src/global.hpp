@@ -6,5 +6,7 @@
 
 #define WITHOUT_VMOT
 
+#define ABS(x)  ( ( (x) < 0) ? -(x) : (x) )
+
 
 #endif
