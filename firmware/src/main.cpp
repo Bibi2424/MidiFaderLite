@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <MIDI.h>
 #include <Encoder.h>
-#include <Bounce.h>  // Bounce library makes button change detection easy
 
 #include "global.hpp"
 #include "bsp.hpp"
@@ -201,27 +200,29 @@ void loop(void) {
 #endif
 
 #if 1
-    static long buttons_last_run_time = 0;
-
-    if(current_time - buttons_last_run_time > 50) {
-        button_get(b1);
-        button_send(b1, false);
-        button_get(b2);
-        button_send(b2, false);
-        button_get(b3);
-        button_send(b3, false);
-        button_get(b4);
-        button_send(b4, false);
-        button_get(b5);
-        button_send(b5, false);
-        button_get(b6);
-        button_send(b6, false);
-        button_get(b7);
-        button_send(b7, false);
-        button_get(b8);
-        button_send(b8, false);
-
-        buttons_last_run_time = current_time;
+    if(button_update(b1)) {
+        button_send(b1);
+    }
+    if(button_update(b2)) {
+        button_send(b2);
+    }
+    if(button_update(b3)) {
+        button_send(b3);
+    }
+    if(button_update(b4)) {
+        button_send(b4);
+    }
+    if(button_update(b5)) {
+        button_send(b5);
+    }
+    if(button_update(b6)) {
+        button_send(b6);
+    }
+    if(button_update(b7)) {
+        button_send(b7);
+    }
+    if(button_update(b8)) {
+        button_send(b8);
     }
 #endif
 
