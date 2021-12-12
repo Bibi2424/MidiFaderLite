@@ -16,8 +16,7 @@ extern void potentiometer_init(potentiometer_t &pot) {
 
 
 extern uint16_t potentiometer_get(potentiometer_t &pot) {
-
-    pot.raw_value = analogRead(pot.analog_pin);
+    pot.raw_value = adc->adc0->analogRead(pot.analog_pin);
     return pot.raw_value;
 }
 

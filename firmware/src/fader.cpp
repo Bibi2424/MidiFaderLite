@@ -12,8 +12,6 @@
 #define OUTPUT_DEAD_ZONE    750
 #define FILTER              9
 
-#define MAX_VALUE           900
-
 
 static void set_motor_speed(fader_t &fader, int16_t speed) {
     if(speed > 0) {
@@ -46,16 +44,22 @@ static void set_motor_speed(fader_t &fader, int16_t speed) {
 }
 
 
+static inline uint16_t fader_get(fader_t &fader) {
+    int value = adc->adc0->analogRead(fader.analog_pin);
+    fader.midi_value = map(value, fader.analog_min_value, fader.analog_max_value, 0, 127);
+    return value;
+}
+
+
 extern void fader_init(fader_t &fader) {
     fader.target = 512;
-    fader_process(fader);
+    fader_get(fader);
     fader_send(fader, true);
 }
 
 
 extern void fader_process(fader_t &fader) {
-    int current_pos = analogRead(fader.analog_pin);
-    fader.midi_value = map(current_pos, fader.analog_min_value, fader.analog_max_value, 0, 127);
+    int current_pos = fader_get(fader);
 
     if(is_touch_pressed(fader.touch_pin) == true) {
         set_motor_speed(fader, 0);
@@ -68,15 +72,17 @@ extern void fader_process(fader_t &fader) {
 
     if(command >= INPUT_DEAD_ZONE) {
         // command *= 2;
-        command /= 4;
+        // command /= 4;
+        // command /= 2;
         command += OUTPUT_DEAD_ZONE;
-        if(command > MAX_VALUE) { command = MAX_VALUE; }
+        if(command > RESOLUTION_MAX_VALUE) { command = RESOLUTION_MAX_VALUE; }
     }
     else if(command <= -INPUT_DEAD_ZONE) {
         // command *= 2;
-        command /= 4;
+        // command /= 4;
+        // command /= 2;
         command -= OUTPUT_DEAD_ZONE;
-        if(command < -MAX_VALUE) { command = -MAX_VALUE; }
+        if(command < -RESOLUTION_MAX_VALUE) { command = -RESOLUTION_MAX_VALUE; }
     }
     else {
         command = 0;
@@ -85,7 +91,6 @@ extern void fader_process(fader_t &fader) {
     if(command != 0) {
         command = (FILTER * command + (10 - FILTER) * fader.last_target) / 10;
     }
-    // Serial.printf("Fader[%u]: %u - %u - %u\n", fader.midi_control, fader.target, current_pos, command);
 
     set_motor_speed(fader, command);
 
@@ -100,9 +105,5 @@ extern void fader_send(fader_t &fader, bool force) {
             fader.target = map(fader.midi_value, 0, 127, 0, 1023);
             fader.last_midi_value = fader.midi_value;
         }
-    }
-    if(fader.pressed != fader.last_pressed || force == true) {
-        usbMIDI.sendControlChange(fader.midi_control + 0x70, fader.pressed?127:0, MIDI_CHANNEL+1);
-        fader.last_pressed = fader.pressed;
     }
 }

@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <MIDI.h>
 #include <Encoder.h>
+#include <ADC.h>
 
 #include "global.hpp"
 #include "bsp.hpp"
@@ -82,6 +83,8 @@ button_t b6 = { .pin = 30, .midi_control = 0x1D };
 button_t b7 = { .pin = 31, .midi_control = 0x1E };
 button_t b8 = { .pin = 32, .midi_control = 0x1F };
 
+ADC* adc = new ADC();
+
 
 void myControlChange(byte channel, byte control, byte value) {
     // Serial.printf("IN[%u-%u]: %u\n", channel, control, value);
@@ -132,6 +135,11 @@ void setup(void) {
 
     usbMIDI.setHandleControlChange(myControlChange);
 
+    adc->adc0->setAveraging(16);
+    adc->adc0->setResolution(10);
+    adc->adc0->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED);
+    adc->adc0->setSamplingSpeed(ADC_SAMPLING_SPEED::MED_SPEED);
+
     Serial.println("Init Done");
 }
 
@@ -153,11 +161,10 @@ void loop(void) {
         fader_process(fader2);
         fader_process(fader3);
 
-        // Serial.printf("fads: %u - %u - %u\n", fader1.midi_value, fader2.midi_value, fader3.midi_value);
         fader_last_process_time = current_time;
     }
 
-    if(current_time - fader_last_send_time > 50) {
+    if(current_time - fader_last_send_time > 20) {
         fader_send(fader1, false);
         fader_send(fader2, false);
         fader_send(fader3, false);
