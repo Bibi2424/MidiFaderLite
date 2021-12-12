@@ -34,10 +34,29 @@
 #define POT2_PIN            A5
 #define POT3_PIN            A6
 
+#define ENCODER1_PIN_A      0
+#define ENCODER1_PIN_B      0
+
+#define ENCODER2_PIN_A      0
+#define ENCODER2_PIN_B      0
+
+#define BUTTON1_PIN         0
+#define BUTTON2_PIN         0
+#define BUTTON3_PIN         0
+#define BUTTON4_PIN         0
+#define BUTTON5_PIN         0
+#define BUTTON6_PIN         0
+#define BUTTON7_PIN         0
+#define BUTTON8_PIN         0
+
 #define RESOLUTION_MAX_VALUE    1023
 
 #define USE_HW_TOUCH            false
 
+//! FIXME: Ugly as hell, I got nothing better at the moment
+#define DECLARE_ADC
+static inline void init_adc(void) {}
+#define adc_get(pin) analogRead(pin)
 
 static inline void init_all_pins(void) {
 #ifdef USE_FADER1

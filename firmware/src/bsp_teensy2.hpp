@@ -21,6 +21,10 @@
 
 #define USE_HW_TOUCH            false
 
+//! FIXME: Ugly as hell, I got nothing better at the moment
+#define DECLARE_ADC
+static inline void init_adc(void) {}
+#define adc_get(pin) analogRead(pin)
 
 static inline void init_all_pins(void) {
 #ifdef USE_FADER1

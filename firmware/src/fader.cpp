@@ -45,7 +45,7 @@ static void set_motor_speed(fader_t &fader, int16_t speed) {
 
 
 static inline uint16_t fader_get(fader_t &fader) {
-    int value = adc->adc0->analogRead(fader.analog_pin);
+    int value = adc_get(fader.analog_pin);
     fader.midi_value = map(value, fader.analog_min_value, fader.analog_max_value, 0, 127);
     return value;
 }

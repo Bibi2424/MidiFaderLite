@@ -2,6 +2,7 @@
 #define BSP_TEENSY32_H
 
 #include <stdint.h>
+#include <ADC.h>
 
 
 #define FADER1_DIR_A_PIN    2
@@ -45,6 +46,20 @@
 
 #define USE_HW_TOUCH            true
 
+//! FIXME: Ugly as hell, I got nothing better at the moment
+#define DECLARE_ADC    ADC adc;
+extern ADC adc;
+
+static inline void init_adc(void) {
+    adc.adc0->setAveraging(16);
+    adc.adc0->setResolution(10);
+    adc.adc0->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED);
+    adc.adc0->setSamplingSpeed(ADC_SAMPLING_SPEED::MED_SPEED);
+}
+
+static inline uint16_t adc_get(int pin) {
+    return adc.adc0->analogRead(pin);
+}
 
 static inline void init_all_pins(void) {
     pinMode(FADER1_DIR_A_PIN, OUTPUT);
