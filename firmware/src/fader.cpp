@@ -8,9 +8,9 @@
 #include "touch.hpp"
 
 
-#define INPUT_DEAD_ZONE     8
-#define OUTPUT_DEAD_ZONE    750
-#define FILTER              9
+#define INPUT_DEAD_ZONE     10
+#define OUTPUT_DEAD_ZONE    700
+#define FILTER              10
 
 
 static void set_motor_speed(fader_t &fader, int16_t speed) {
@@ -73,14 +73,14 @@ extern void fader_process(fader_t &fader) {
     if(command >= INPUT_DEAD_ZONE) {
         // command *= 2;
         // command /= 4;
-        // command /= 2;
+        command /= 2;
         command += OUTPUT_DEAD_ZONE;
         if(command > RESOLUTION_MAX_VALUE) { command = RESOLUTION_MAX_VALUE; }
     }
     else if(command <= -INPUT_DEAD_ZONE) {
         // command *= 2;
         // command /= 4;
-        // command /= 2;
+        command /= 2;
         command -= OUTPUT_DEAD_ZONE;
         if(command < -RESOLUTION_MAX_VALUE) { command = -RESOLUTION_MAX_VALUE; }
     }

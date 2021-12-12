@@ -51,7 +51,7 @@
 extern ADC adc;
 
 static inline void init_adc(void) {
-    adc.adc0->setAveraging(16);
+    adc.adc0->setAveraging(32);
     adc.adc0->setResolution(10);
     adc.adc0->setConversionSpeed(ADC_CONVERSION_SPEED::MED_SPEED);
     adc.adc0->setSamplingSpeed(ADC_SAMPLING_SPEED::MED_SPEED);

@@ -186,7 +186,7 @@ void loop(void) {
     static long encs_last_process_time = 0;
     static long encs_last_send_time = 0;
 
-    if(current_time - encs_last_process_time > 5) {
+    if(current_time - encs_last_process_time > 1) {
         encoder_get(encoder1);
         encoder_get(encoder2);
 
