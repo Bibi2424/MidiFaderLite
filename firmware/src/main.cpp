@@ -10,6 +10,7 @@
 #include "encoder.hpp"
 #include "potentiometer.hpp"
 #include "button.hpp"
+#include "light_effect.hpp"
 
 
 fader_t fader1 = {
@@ -84,6 +85,13 @@ button_t b8 = { .pin = 32, .midi_control = 0x1F };
 
 DECLARE_ADC;
 
+const effect_t stanby_effect = {
+    .rgb = { 0, 32, 0 },
+    .type = SQUARE,
+    .duration = 1000
+};
+
+
 void myControlChange(byte channel, byte control, byte value) {
     // Serial.printf("IN[%u-%u]: %u\n", channel, control, value);
     if(channel != 1) { return; }
@@ -114,6 +122,9 @@ void setup(void) {
     init_all_pins();
     init_pwm();
     init_touch();
+
+    light_effect_init();
+    light_effect_trigger(stanby_effect);
 
     fader_init(fader1);
     fader_init(fader2);
@@ -149,7 +160,7 @@ void loop(void) {
     static long fader_last_process_time = 0;
     static long fader_last_send_time = 0;
 
-    if(current_time - fader_last_process_time > 5) {
+    if(current_time - fader_last_process_time > 20) {
 
         fader_process(fader1);
         fader_process(fader2);
@@ -158,7 +169,7 @@ void loop(void) {
         fader_last_process_time = current_time;
     }
 
-    if(current_time - fader_last_send_time > 20) {
+    if(current_time - fader_last_send_time > 50) {
         fader_send(fader1, false);
         fader_send(fader2, false);
         fader_send(fader3, false);
@@ -186,7 +197,7 @@ void loop(void) {
     static long encs_last_process_time = 0;
     static long encs_last_send_time = 0;
 
-    if(current_time - encs_last_process_time > 1) {
+    if(current_time - encs_last_process_time > 10) {
         encoder_get(encoder1);
         encoder_get(encoder2);
 
@@ -225,6 +236,10 @@ void loop(void) {
     if(button_update(b8)) {
         button_send(b8);
     }
+#endif
+
+#if 1
+    light_effect_run();
 #endif
 
 #if 0

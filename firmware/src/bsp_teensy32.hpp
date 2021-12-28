@@ -4,6 +4,9 @@
 #include <stdint.h>
 #include <ADC.h>
 
+#define LED_RED             4
+#define LED_GREEN           5
+#define LED_BLUE            6
 
 #define FADER1_DIR_A_PIN    2
 #define FADER1_DIR_B_PIN    1
@@ -78,6 +81,10 @@ static inline void init_all_pins(void) {
     pinMode(POT1_PIN, INPUT);
     pinMode(POT2_PIN, INPUT);
     pinMode(POT3_PIN, INPUT);
+
+    pinMode(LED_RED, OUTPUT);
+    pinMode(LED_GREEN, OUTPUT);
+    pinMode(LED_BLUE, OUTPUT);
 }
 
 static inline void init_pwm(void) {
