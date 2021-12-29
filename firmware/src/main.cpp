@@ -19,6 +19,7 @@ fader_t fader1 = {
     .speed_pin = FADER1_SPEED_PIN,
     .touch_pin = FADER1_TOUCH_PIN,
     .analog_pin = FADER1_POT_PIN,
+    .m_deadzone = 625,
 
     .midi_control = 1,
 
@@ -31,6 +32,7 @@ fader_t fader2 = {
     .speed_pin = FADER2_SPEED_PIN,
     .touch_pin = FADER2_TOUCH_PIN,
     .analog_pin = FADER2_POT_PIN,
+    .m_deadzone = 750,
 
     .midi_control = 7,
 
@@ -43,6 +45,7 @@ fader_t fader3 = {
     .speed_pin = FADER3_SPEED_PIN,
     .touch_pin = FADER3_TOUCH_PIN,
     .analog_pin = FADER3_POT_PIN,
+    .m_deadzone = 625,
 
     .midi_control = 11,
 
@@ -86,7 +89,7 @@ button_t b8 = { .pin = 32, .midi_control = 0x1F };
 DECLARE_ADC;
 
 const effect_t stanby_effect = {
-    .rgb = { 0, 32, 0 },
+    .rgb = { 0, 16, 0 },
     .type = SQUARE,
     .duration = 1000
 };
@@ -97,16 +100,16 @@ void myControlChange(byte channel, byte control, byte value) {
     if(channel != 1) { return; }
 
     if(fader1.midi_control == control) {
-        Serial.printf("IN:%u\n", value);
-        fader1.target = map(value, 0, 127, 0, 1023);
+        // Serial.printf("IN:%u\n", value);
+        fader_set(fader1, value);
     }
     if(fader2.midi_control == control) {
-        Serial.printf("IN:%u\n", value);
-        fader2.target = map(value, 0, 127, 0, 1023);
+        // Serial.printf("IN:%u\n", value);
+        fader_set(fader2, value);
     }
     if(fader3.midi_control == control) {
-        Serial.printf("IN:%u\n", value);
-        fader3.target = map(value, 0, 127, 0, 1023);
+        // Serial.printf("IN:%u\n", value);
+        fader_set(fader3, value);
     }
 }
 
@@ -153,6 +156,14 @@ void loop(void) {
     long current_time = millis();
 
 #if 1
+    static long last_run = 0;
+    static long max = 0;
+    long elapse = micros() - last_run;
+    if(elapse > max && last_run != 0) {
+        max = elapse;
+        Serial.printf("L=%ld, %ld\n", elapse, max);
+    }
+    last_run = micros();
     usbMIDI.read();
 #endif
 
@@ -160,20 +171,12 @@ void loop(void) {
     static long fader_last_process_time = 0;
     static long fader_last_send_time = 0;
 
-    if(current_time - fader_last_process_time > 20) {
+    if(current_time - fader_last_process_time > 5) {
 
         fader_process(fader1);
         fader_process(fader2);
         fader_process(fader3);
-
         fader_last_process_time = current_time;
-    }
-
-    if(current_time - fader_last_send_time > 50) {
-        fader_send(fader1, false);
-        fader_send(fader2, false);
-        fader_send(fader3, false);
-        fader_last_send_time = current_time;
     }
 
 #endif
@@ -183,11 +186,8 @@ void loop(void) {
 
     if(current_time - pots_last_run_time > 50) {
         potentiometer_get(pot1);
-        potentiometer_send(pot1, false);
         potentiometer_get(pot2);
-        potentiometer_send(pot2, false);
         potentiometer_get(pot3);
-        potentiometer_send(pot3, false);
 
         pots_last_run_time = current_time;
     }
@@ -195,46 +195,57 @@ void loop(void) {
 
 #if 1
     static long encs_last_process_time = 0;
-    static long encs_last_send_time = 0;
 
-    if(current_time - encs_last_process_time > 10) {
+    if(current_time - encs_last_process_time > 5) {
         encoder_get(encoder1);
         encoder_get(encoder2);
 
         encs_last_process_time = current_time;
     }
-    if(current_time - encs_last_send_time > 50) {
+#endif
+
+#if 1
+    if(current_time - fader_last_send_time > 25) {
+        fader_send(fader1, false);
+        fader_send(fader2, false);
+        fader_send(fader3, false);
+        potentiometer_send(pot1, false);
+        potentiometer_send(pot2, false);
+        potentiometer_send(pot3, false);
         encoder_send(encoder1);
         encoder_send(encoder2);
-
-        encs_last_send_time = current_time;
+        fader_last_send_time = current_time;
     }
 #endif
 
 #if 1
-    if(button_update(b1)) {
-        button_send(b1);
-    }
-    if(button_update(b2)) {
-        button_send(b2);
-    }
-    if(button_update(b3)) {
-        button_send(b3);
-    }
-    if(button_update(b4)) {
-        button_send(b4);
-    }
-    if(button_update(b5)) {
-        button_send(b5);
-    }
-    if(button_update(b6)) {
-        button_send(b6);
-    }
-    if(button_update(b7)) {
-        button_send(b7);
-    }
-    if(button_update(b8)) {
-        button_send(b8);
+    static long button_last_process_time = 0;
+    if(current_time - button_last_process_time > 1) {
+        if(button_update(b1)) {
+            button_send(b1);
+        }
+        if(button_update(b2)) {
+            button_send(b2);
+        }
+        if(button_update(b3)) {
+            button_send(b3);
+        }
+        if(button_update(b4)) {
+            button_send(b4);
+        }
+        if(button_update(b5)) {
+            button_send(b5);
+        }
+        if(button_update(b6)) {
+            button_send(b6);
+        }
+        if(button_update(b7)) {
+            button_send(b7);
+        }
+        if(button_update(b8)) {
+            button_send(b8);
+        }
+        button_last_process_time = current_time;
     }
 #endif
 

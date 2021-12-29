@@ -10,6 +10,8 @@ typedef struct {
     const int touch_pin;
     const int analog_pin;
 
+    const uint16_t m_deadzone;
+
     const uint8_t midi_control;
 
     int16_t analog_min_value;
@@ -19,6 +21,7 @@ typedef struct {
     bool pressed;
     bool last_pressed;
     uint16_t target;
+    int32_t integral;
     uint8_t midi_value;
     uint8_t last_midi_value;
 
@@ -26,6 +29,7 @@ typedef struct {
 
 
 extern void fader_init(fader_t &fader);
+extern void fader_set(fader_t &fader, uint8_t midi_target);
 extern void fader_process(fader_t &fader);
 extern void fader_send(fader_t &fader, bool force);
 
