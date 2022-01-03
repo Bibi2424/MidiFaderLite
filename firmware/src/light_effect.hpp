@@ -13,21 +13,17 @@ typedef struct {
 	uint8_t blue;
 } color_t;
 
-typedef enum {
-	CLEAR,
-	SQUARE,
-	NONE = 0xff
-} effect_type_t;
-
-typedef struct {
-	color_t rgb;
-	effect_type_t type;
-	uint16_t duration;
-} effect_t;
+typedef union {
+	struct {
+		uint8_t midi_rx : 1;
+		uint8_t midi_tx : 1;	
+	};
+	uint8_t raw;
+} event_type_t;
 
 
 extern void light_effect_init(void);
-extern void light_effect_trigger(const effect_t &effect);
+extern void light_effect_register_event(event_type_t event);
 extern void light_effect_run(void);
 
 #endif

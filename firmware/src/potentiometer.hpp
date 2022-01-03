@@ -14,7 +14,7 @@ typedef struct {
 
 extern void potentiometer_init(potentiometer_t &pot);
 extern uint16_t potentiometer_get(potentiometer_t &pot);
-extern void potentiometer_send(potentiometer_t &pot, bool force);
+extern bool potentiometer_send(potentiometer_t &pot, bool force);
 
 
 #endif

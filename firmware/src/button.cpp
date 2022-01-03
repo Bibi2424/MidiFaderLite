@@ -23,8 +23,9 @@ extern bool button_update(button_t &button) {
 }
 
 
-extern void button_send(button_t &button) {
+extern bool button_send(button_t &button) {
 	uint8_t pressed = button.b.read() ? 0 : 127;
     usbMIDI.sendControlChange(button.midi_control, pressed, MIDI_CHANNEL);
+    return true;
 }
 

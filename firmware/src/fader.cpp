@@ -118,12 +118,14 @@ extern void fader_process(fader_t &fader) {
 }
 
 
-extern void fader_send(fader_t &fader, bool force) {
+extern bool fader_send(fader_t &fader, bool force) {
     if(fader.pressed || force == true) {
         if(fader.midi_value != fader.last_midi_value || force == true) {
             usbMIDI.sendControlChange(fader.midi_control, fader.midi_value, MIDI_CHANNEL);
             fader.target = map(fader.midi_value, 0, 127, 0, 1023);
             fader.last_midi_value = fader.midi_value;
+            return true;
         }
     }
+    return false;
 }

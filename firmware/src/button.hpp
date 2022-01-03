@@ -13,7 +13,7 @@ typedef struct {
 
 extern void button_init(button_t &button);
 extern bool button_update(button_t &button);
-extern void button_send(button_t &button);
+extern bool button_send(button_t &button);
 
 
 #endif

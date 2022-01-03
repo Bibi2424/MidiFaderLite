@@ -14,7 +14,7 @@ typedef struct {
 
 // extern void encoder_init(encoder_t &enc);
 extern uint16_t encoder_get(encoder_t &enc);
-extern void encoder_send(encoder_t &enc);
+extern bool encoder_send(encoder_t &enc);
 
 
 #endif

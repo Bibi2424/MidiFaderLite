@@ -21,7 +21,7 @@ extern uint16_t potentiometer_get(potentiometer_t &pot) {
 }
 
 
-extern void potentiometer_send(potentiometer_t &pot, bool force) {
+extern bool potentiometer_send(potentiometer_t &pot, bool force) {
     //! TEST: maybe add a buffer close to edge, map to 0..129, 0-1 = 0, 128-129 = 127, rest is value-1
 
     if( (pot.raw_value != 0 && pot.raw_value != 1023) && force == false) {
@@ -33,5 +33,7 @@ extern void potentiometer_send(potentiometer_t &pot, bool force) {
         pot.midi_value = map(pot.raw_value, 4, 1023, 0, 127);
         usbMIDI.sendControlChange(pot.midi_control, pot.midi_value, MIDI_CHANNEL);
         pot.last_value = pot.raw_value;
+        return true;
     }
+    return false;
 }

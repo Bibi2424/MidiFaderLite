@@ -31,7 +31,7 @@ typedef struct {
 extern void fader_init(fader_t &fader);
 extern void fader_set(fader_t &fader, uint8_t midi_target);
 extern void fader_process(fader_t &fader);
-extern void fader_send(fader_t &fader, bool force);
+extern bool fader_send(fader_t &fader, bool force);
 
 
 #endif
