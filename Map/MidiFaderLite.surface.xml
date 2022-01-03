@@ -11,43 +11,55 @@
 			<MidiMessage status="#B0" channel="0" address="#B"/>
 		</Control>
 		<Control name="Knob[0]" title="[K1]" type="knob" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#10"/>
+			<MidiMessage status="#B0" address="#10"/>
 		</Control>
 		<Control name="Knob[1]" title="[K2]" type="knob" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#11"/>
+			<MidiMessage status="#B0" address="#11"/>
 		</Control>
 		<Control name="Knob[2]" title="[K3]" type="knob" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#12"/>
+			<MidiMessage status="#B0" address="#12"/>
 		</Control>
-		<Control name="Encoder[0]" title="[E1]" type="relative" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#13"/>
+		<Control name="Encoder[0]" title="[E0]" type="relative" options="receive public">
+			<MidiMessage status="Controller" address="#13"/>
 		</Control>
-		<Control name="Encoder[1]" title="[E2]" type="relative" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#14"/>
+		<Control name="Encoder[1]" title="[E1]" type="relative" options="receive public">
+			<MidiMessage status="Controller" address="#14"/>
 		</Control>
-		<Control name="Button[0]" title="[B1]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#1B"/>
+		<Control name="Button[0]" title="B[1]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#1B"/>
 		</Control>
-		<Control name="Button[1]" title="[B2]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#1A"/>
+		<Control name="Button[1]" title="B[2]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#1A"/>
 		</Control>
-		<Control name="Button[2]" title="[B3]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#19"/>
+		<Control name="Button[2]" title="B[3]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#19"/>
 		</Control>
-		<Control name="Button[3]" title="[B4]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#18"/>
+		<Control name="Button[3]" title="B[4]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#18"/>
 		</Control>
-		<Control name="Button[4]" title="[B5]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#1D"/>
+		<Control name="Button[4]" title="B[5]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#1D"/>
 		</Control>
-		<Control name="Button[4]" title="[B6]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#1C"/>
+		<Control name="Button[5]" title="B[6]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#1C"/>
 		</Control>
-		<Control name="Button[5]" title="[B7]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#1E"/>
+		<Control name="Button[6]" title="B[7]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#1E"/>
 		</Control>
-		<Control name="Button[6]" title="[B8]" type="button" options="receive public">
-			<MidiMessage status="#B0" channel="0" address="#1F"/>
+		<Control name="Button[7]" title="B[8]" type="trigger" options="receive public">
+			<MidiMessage status="#B0" address="#1F"/>
 		</Control>
 	</Controls>
+
+
+	<Mappings>
+		<Global>
+			<Command control="Encoder[0]" command.category="Zoom" command.name="Zoom In Fine" command2.category="Zoom" command2.name="Zoom Out Fine"/>
+		</Global>
+
+		<DeviceMapping device="TransportPanel">
+			<Relative control="Encoder[1]"  param="freeCursorTime"/>
+		</DeviceMapping>
+	</Mappings>
+
 </ControlSurface>
