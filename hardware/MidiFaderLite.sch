@@ -4,8 +4,8 @@ EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
 Sheet 1 1
-Title ""
-Date ""
+Title "Midi Fader Lite"
+Date "2022-01-03"
 Rev ""
 Comp ""
 Comment1 ""
@@ -165,40 +165,20 @@ F 3 "" H 8050 1400 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8050 1200 8050 1400
-Text GLabel 8250 1300 3    50   Input ~ 0
-Slider1
-Text GLabel 6200 1900 0    50   Input ~ 0
-SpeedFadeur1
 Wire Wire Line
 	6200 1900 6400 1900
-Text GLabel 6200 1500 0    50   Input ~ 0
-DIRAFadeur1
-Text GLabel 6200 1700 0    50   Input ~ 0
-DIRBFadeur1
 Wire Wire Line
 	6400 1500 6200 1500
 Wire Wire Line
 	6400 1700 6200 1700
-Text GLabel 6200 2500 0    50   Input ~ 0
-SpeedFadeur2
 Wire Wire Line
 	6200 2500 6400 2500
-Text GLabel 6200 2100 0    50   Input ~ 0
-DIRAFadeur2
-Text GLabel 6200 2300 0    50   Input ~ 0
-DIRBFadeur2
 Wire Wire Line
 	6400 2100 6200 2100
 Wire Wire Line
 	6400 2300 6200 2300
-Text GLabel 6200 4600 0    50   Input ~ 0
-SpeedFadeur3
 Wire Wire Line
 	6200 4600 6400 4600
-Text GLabel 6200 4200 0    50   Input ~ 0
-DIRAFadeur3
-Text GLabel 6200 4400 0    50   Input ~ 0
-DIRBFadeur3
 Wire Wire Line
 	6400 4200 6200 4200
 Wire Wire Line
@@ -239,8 +219,6 @@ Wire Wire Line
 	3900 5950 3950 5950
 Wire Wire Line
 	3950 5950 3950 6000
-Text GLabel 3750 6200 3    50   Input ~ 0
-POT1
 Wire Wire Line
 	3750 6100 3750 6200
 $Comp
@@ -275,8 +253,6 @@ Wire Wire Line
 	4600 5950 4600 6000
 Wire Wire Line
 	4400 6100 4400 6200
-Text GLabel 4400 6200 3    50   Input ~ 0
-POT2
 Wire Wire Line
 	8250 1300 8250 1200
 $Comp
@@ -303,8 +279,6 @@ F 3 "" H 9800 1400 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	9800 1200 9800 1400
-Text GLabel 10000 1300 3    50   Input ~ 0
-Slider2
 Wire Wire Line
 	10000 1300 10000 1200
 Wire Wire Line
@@ -343,14 +317,10 @@ F 3 "" H 8050 4100 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	8050 3900 8050 4100
-Text GLabel 8250 4000 3    50   Input ~ 0
-Slider3
 Wire Wire Line
 	8250 4000 8250 3900
 Wire Wire Line
 	8600 3900 8600 3950
-Text GLabel 9100 3950 2    50   Input ~ 0
-Touch3
 Wire Wire Line
 	9050 4200 9050 4250
 Wire Wire Line
@@ -358,98 +328,68 @@ Wire Wire Line
 $Comp
 L teensy:Teensy3.2 U4
 U 1 1 618D6ACC
-P 3050 2650
-F 0 "U4" H 3050 4287 60  0000 C CNN
-F 1 "Teensy3.2" H 3050 4181 60  0000 C CNN
-F 2 "KiCad_library:Teensy30_31_32_LC" H 3050 1900 60  0001 C CNN
-F 3 "" H 3050 1900 60  0000 C CNN
-	1    3050 2650
+P 2800 3000
+F 0 "U4" H 2800 4637 60  0000 C CNN
+F 1 "Teensy3.2" H 2800 4531 60  0000 C CNN
+F 2 "KiCad_library:Teensy30_31_32_LC" H 2800 2250 60  0001 C CNN
+F 3 "" H 2800 2250 60  0000 C CNN
+	1    2800 3000
 	1    0    0    -1  
 $EndComp
-Text GLabel -1150 1950 0    50   Input ~ 0
-SpeedFadeur1
-Text GLabel -1150 1750 0    50   Input ~ 0
-DIRAFadeur1
-Text GLabel -1150 1850 0    50   Input ~ 0
-DIRBFadeur1
-Text GLabel -1150 2350 0    50   Input ~ 0
-SpeedFadeur2
-Text GLabel -1150 2150 0    50   Input ~ 0
-DIRAFadeur2
-Text GLabel -1150 2250 0    50   Input ~ 0
-DIRBFadeur2
 Wire Wire Line
-	1900 2100 2050 2100
+	1650 2450 1800 2450
 Wire Wire Line
-	1900 2200 2050 2200
+	1650 2550 1800 2550
 Wire Wire Line
-	1900 2300 2050 2300
+	1650 2650 1800 2650
 Wire Wire Line
-	1900 2400 2050 2400
+	1650 2750 1800 2750
 Wire Wire Line
-	1900 2500 2050 2500
+	1650 2850 1800 2850
 Wire Wire Line
-	1900 2600 2050 2600
-Text GLabel -1150 2750 0    50   Input ~ 0
-SpeedFadeur3
-Text GLabel -1150 2550 0    50   Input ~ 0
-DIRAFadeur3
-Text GLabel -1150 2650 0    50   Input ~ 0
-DIRBFadeur3
+	1650 2950 1800 2950
 Wire Wire Line
-	1900 1800 2050 1800
+	1650 2150 1800 2150
 Wire Wire Line
-	1900 1900 2050 1900
+	1650 2250 1800 2250
 Wire Wire Line
-	1900 2000 2050 2000
-Text GLabel -1150 4250 0    50   Input ~ 0
-Touch1
+	1650 2350 1800 2350
 Wire Wire Line
-	1850 3300 2050 3300
-Text GLabel -1150 4700 0    50   Input ~ 0
-POT1
-Text GLabel -1150 4800 0    50   Input ~ 0
-POT2
-Text GLabel -1150 4900 0    50   Input ~ 0
-POT3
-Text GLabel -1150 4350 0    50   Input ~ 0
-Touch2
-Text GLabel -1150 4450 0    50   Input ~ 0
-Touch3
+	1600 3650 1800 3650
 Wire Wire Line
-	1850 3400 2050 3400
+	1600 3750 1800 3750
 Wire Wire Line
-	1850 3500 2050 3500
+	1600 3850 1800 3850
 Wire Wire Line
-	1850 3600 2050 3600
+	1600 3950 1800 3950
 Wire Wire Line
-	1850 3700 2050 3700
+	1600 4050 1800 4050
 Wire Wire Line
-	1850 3800 2050 3800
+	1600 4150 1800 4150
 $Comp
 L power:GNDREF #PWR0101
 U 1 1 61AB16AC
-P 1850 1150
-F 0 "#PWR0101" H 1850 900 50  0001 C CNN
-F 1 "GNDREF" H 1855 977 50  0001 C CNN
-F 2 "" H 1850 1150 50  0001 C CNN
-F 3 "" H 1850 1150 50  0001 C CNN
-	1    1850 1150
+P 1600 1500
+F 0 "#PWR0101" H 1600 1250 50  0001 C CNN
+F 1 "GNDREF" H 1605 1327 50  0001 C CNN
+F 2 "" H 1600 1500 50  0001 C CNN
+F 3 "" H 1600 1500 50  0001 C CNN
+	1    1600 1500
 	1    0    0    -1  
 $EndComp
 $Comp
 L power:GNDREF #PWR0103
 U 1 1 61AB9A41
-P 4700 3700
-F 0 "#PWR0103" H 4700 3450 50  0001 C CNN
-F 1 "GNDREF" H 4705 3527 50  0001 C CNN
-F 2 "" H 4700 3700 50  0001 C CNN
-F 3 "" H 4700 3700 50  0001 C CNN
-	1    4700 3700
+P 4450 4050
+F 0 "#PWR0103" H 4450 3800 50  0001 C CNN
+F 1 "GNDREF" H 4455 3877 50  0001 C CNN
+F 2 "" H 4450 4050 50  0001 C CNN
+F 3 "" H 4450 4050 50  0001 C CNN
+	1    4450 4050
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4050 3700 4700 3700
+	3800 4050 4450 4050
 $Comp
 L power:+5V #PWR0107
 U 1 1 61AC408F
@@ -508,63 +448,63 @@ $EndComp
 $Comp
 L power:+5V #PWR0129
 U 1 1 61AFE744
-P 4600 3450
-F 0 "#PWR0129" H 4600 3300 50  0001 C CNN
-F 1 "+5V" H 4615 3623 50  0000 C CNN
-F 2 "" H 4600 3450 50  0001 C CNN
-F 3 "" H 4600 3450 50  0001 C CNN
-	1    4600 3450
+P 4350 3800
+F 0 "#PWR0129" H 4350 3650 50  0001 C CNN
+F 1 "+5V" H 4365 3973 50  0000 C CNN
+F 2 "" H 4350 3800 50  0001 C CNN
+F 3 "" H 4350 3800 50  0001 C CNN
+	1    4350 3800
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4050 3500 4600 3500
+	3800 3850 4350 3850
 Wire Wire Line
-	4600 3500 4600 3450
+	4350 3850 4350 3800
 $Comp
 L power:+3V3 #PWR0130
 U 1 1 61B0E0A3
-P 4850 3750
-F 0 "#PWR0130" H 4850 3600 50  0001 C CNN
-F 1 "+3V3" H 4865 3923 50  0000 C CNN
-F 2 "" H 4850 3750 50  0001 C CNN
-F 3 "" H 4850 3750 50  0001 C CNN
-	1    4850 3750
+P 4600 4100
+F 0 "#PWR0130" H 4600 3950 50  0001 C CNN
+F 1 "+3V3" H 4615 4273 50  0000 C CNN
+F 2 "" H 4600 4100 50  0001 C CNN
+F 3 "" H 4600 4100 50  0001 C CNN
+	1    4600 4100
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4050 3800 4600 3800
+	3800 4150 4350 4150
 Wire Wire Line
-	4600 3800 4600 3850
+	4350 4150 4350 4200
 Wire Wire Line
-	4600 3850 4850 3850
+	4350 4200 4600 4200
 Wire Wire Line
-	4850 3750 4850 3850
+	4600 4100 4600 4200
 $Comp
 L power:+3V3 #PWR0134
 U 1 1 61B1DE83
-P 1250 2800
-F 0 "#PWR0134" H 1250 2650 50  0001 C CNN
-F 1 "+3V3" H 1265 2973 50  0000 C CNN
-F 2 "" H 1250 2800 50  0001 C CNN
-F 3 "" H 1250 2800 50  0001 C CNN
-	1    1250 2800
+P 1000 3150
+F 0 "#PWR0134" H 1000 3000 50  0001 C CNN
+F 1 "+3V3" H 1015 3323 50  0000 C CNN
+F 2 "" H 1000 3150 50  0001 C CNN
+F 3 "" H 1000 3150 50  0001 C CNN
+	1    1000 3150
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1250 2800 2050 2800
+	1000 3150 1800 3150
 $Comp
 L power:GNDREF #PWR0135
 U 1 1 61B260B3
-P 1250 2900
-F 0 "#PWR0135" H 1250 2650 50  0001 C CNN
-F 1 "GNDREF" H 1255 2727 50  0001 C CNN
-F 2 "" H 1250 2900 50  0001 C CNN
-F 3 "" H 1250 2900 50  0001 C CNN
-	1    1250 2900
+P 1000 3250
+F 0 "#PWR0135" H 1000 3000 50  0001 C CNN
+F 1 "GNDREF" H 1005 3077 50  0001 C CNN
+F 2 "" H 1000 3250 50  0001 C CNN
+F 3 "" H 1000 3250 50  0001 C CNN
+	1    1000 3250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	1250 2900 2050 2900
+	1000 3250 1800 3250
 $Comp
 L Switch:SW_SPST SW2
 U 1 1 6177916A
@@ -587,8 +527,6 @@ F 3 "" H 700 5700 50  0001 C CNN
 	1    700  5700
 	1    0    0    -1  
 $EndComp
-Text GLabel 1350 5650 2    50   Input ~ 0
-Button1
 Wire Wire Line
 	1250 5650 1150 5650
 Wire Wire Line
@@ -646,8 +584,6 @@ F 3 "" H 700 6300 50  0001 C CNN
 	1    700  6300
 	1    0    0    -1  
 $EndComp
-Text GLabel 1350 6250 2    50   Input ~ 0
-Button2
 Wire Wire Line
 	1250 6250 1150 6250
 Wire Wire Line
@@ -705,8 +641,6 @@ F 3 "" H 700 6900 50  0001 C CNN
 	1    700  6900
 	1    0    0    -1  
 $EndComp
-Text GLabel 1350 6850 2    50   Input ~ 0
-Button3
 Wire Wire Line
 	1250 6850 1150 6850
 Wire Wire Line
@@ -764,8 +698,6 @@ F 3 "" H 700 7500 50  0001 C CNN
 	1    700  7500
 	1    0    0    -1  
 $EndComp
-Text GLabel 1350 7450 2    50   Input ~ 0
-Button4
 Wire Wire Line
 	1250 7450 1150 7450
 Wire Wire Line
@@ -812,12 +744,6 @@ F 3 "" H 10350 6000 50  0001 C CNN
 	1    10350 6000
 	1    0    0    -1  
 $EndComp
-Text GLabel 9150 5500 0    50   Input ~ 0
-LED_BLUE
-Text GLabel 9150 5700 0    50   Input ~ 0
-LED_GREEN
-Text GLabel 9150 5900 0    50   Input ~ 0
-LED_RED
 $Comp
 L Device:Rotary_Encoder SW1
 U 1 1 6184A9A0
@@ -844,56 +770,34 @@ Wire Wire Line
 	4050 7250 4150 7250
 Wire Wire Line
 	4150 7250 4150 7450
-Text GLabel 4250 7150 2    50   Input ~ 0
-ROT1B
-Text GLabel 4250 7350 2    50   Input ~ 0
-ROT1A
 Wire Wire Line
 	4050 7150 4250 7150
 Wire Wire Line
 	4050 7350 4250 7350
-Text GLabel -1150 4000 0    50   Input ~ 0
-LED_BLUE
-Text GLabel -1150 3900 0    50   Input ~ 0
-LED_GREEN
 Wire Wire Line
-	4050 3900 4250 3900
+	3800 4250 4000 4250
 Wire Wire Line
-	4050 4000 4250 4000
-Text GLabel -1150 3800 0    50   Input ~ 0
-LED_RED
+	3800 4350 4000 4350
 Wire Wire Line
-	1850 4000 2050 4000
-Text GLabel -1150 3150 0    50   Input ~ 0
-ROT1B
-Text GLabel -1150 3050 0    50   Input ~ 0
-ROT1A
+	1600 4350 1800 4350
 Wire Wire Line
-	4250 3200 4050 3200
+	4000 3550 3800 3550
 Wire Wire Line
-	4050 3300 4250 3300
-Text GLabel -1150 1150 0    50   Input ~ 0
-Button5
-Text GLabel -1150 1250 0    50   Input ~ 0
-Button6
-Text GLabel -1150 1350 0    50   Input ~ 0
-Button7
-Text GLabel -1150 1450 0    50   Input ~ 0
-Button8
+	3800 3650 4000 3650
 Wire Wire Line
-	2050 1300 2050 1100
+	1800 1650 1800 1450
 Wire Wire Line
-	2050 1100 1850 1100
+	1800 1450 1600 1450
 Wire Wire Line
-	1850 1100 1850 1150
+	1600 1450 1600 1500
 Wire Wire Line
-	1900 1400 2050 1400
+	1650 1750 1800 1750
 Wire Wire Line
-	1900 1500 2050 1500
+	1650 1850 1800 1850
 Wire Wire Line
-	1900 1600 2050 1600
+	1650 1950 1800 1950
 Wire Wire Line
-	1900 1700 2050 1700
+	1650 2050 1800 2050
 $Comp
 L Device:LED_CRGB D1
 U 1 1 61A6406F
@@ -973,8 +877,6 @@ Wire Wire Line
 	8500 1200 8500 1550
 Wire Wire Line
 	8600 1200 8600 1250
-Text GLabel 9100 1250 2    50   Input ~ 0
-Touch1
 Wire Wire Line
 	9050 1500 9050 1550
 $Comp
@@ -1007,8 +909,6 @@ Wire Wire Line
 	10250 1200 10250 1550
 Wire Wire Line
 	10350 1200 10350 1250
-Text GLabel 10850 1250 2    50   Input ~ 0
-Touch2
 Wire Wire Line
 	10800 1500 10800 1550
 $Comp
@@ -1059,8 +959,6 @@ F 3 "" H 2050 5700 50  0001 C CNN
 	1    2050 5700
 	1    0    0    -1  
 $EndComp
-Text GLabel 2700 5650 2    50   Input ~ 0
-Button5
 Wire Wire Line
 	2600 5650 2500 5650
 Wire Wire Line
@@ -1118,8 +1016,6 @@ F 3 "" H 2050 6300 50  0001 C CNN
 	1    2050 6300
 	1    0    0    -1  
 $EndComp
-Text GLabel 2700 6250 2    50   Input ~ 0
-Button6
 Wire Wire Line
 	2600 6250 2500 6250
 Wire Wire Line
@@ -1177,8 +1073,6 @@ F 3 "" H 2050 6900 50  0001 C CNN
 	1    2050 6900
 	1    0    0    -1  
 $EndComp
-Text GLabel 2700 6850 2    50   Input ~ 0
-Button7
 Wire Wire Line
 	2600 6850 2500 6850
 Wire Wire Line
@@ -1236,8 +1130,6 @@ F 3 "" H 2050 7500 50  0001 C CNN
 	1    2050 7500
 	1    0    0    -1  
 $EndComp
-Text GLabel 2700 7450 2    50   Input ~ 0
-Button8
 Wire Wire Line
 	2600 7450 2500 7450
 Wire Wire Line
@@ -1299,10 +1191,6 @@ Wire Wire Line
 	5200 7250 5300 7250
 Wire Wire Line
 	5300 7250 5300 7450
-Text GLabel 5400 7150 2    50   Input ~ 0
-ROT2B
-Text GLabel 5400 7350 2    50   Input ~ 0
-ROT2A
 Wire Wire Line
 	5200 7150 5400 7150
 Wire Wire Line
@@ -1339,8 +1227,6 @@ Wire Wire Line
 	5250 5950 5250 6000
 Wire Wire Line
 	5050 6100 5050 6200
-Text GLabel 5050 6200 3    50   Input ~ 0
-POT3
 $Comp
 L power:+3V3 #PWR?
 U 1 1 61954BC7
@@ -1352,259 +1238,223 @@ F 3 "" H 4850 5900 50  0001 C CNN
 	1    4850 5900
 	1    0    0    -1  
 $EndComp
-Text GLabel -1150 750  0    50   Input ~ 0
-Button1
-Text GLabel -1150 850  0    50   Input ~ 0
-Button2
-Text GLabel -1150 950  0    50   Input ~ 0
-Button3
-Text GLabel -1150 1050 0    50   Input ~ 0
-Button4
-Text GLabel -1150 3450 0    50   Input ~ 0
-ROT2B
-Text GLabel -1150 3350 0    50   Input ~ 0
-ROT2A
 $Comp
 L Connector:USB_B J?
 U 1 1 619F4D80
-P 4550 750
-F 0 "J?" V 4561 1080 50  0000 L CNN
-F 1 "USB_B" V 4652 1080 50  0000 L CNN
-F 2 "" H 4700 700 50  0001 C CNN
-F 3 " ~" H 4700 700 50  0001 C CNN
-	1    4550 750 
+P 4300 1100
+F 0 "J?" V 4311 1430 50  0000 L CNN
+F 1 "USB_B" V 4402 1430 50  0000 L CNN
+F 2 "" H 4450 1050 50  0001 C CNN
+F 3 " ~" H 4450 1050 50  0001 C CNN
+	1    4300 1100
 	0    1    1    0   
 $EndComp
 Wire Wire Line
-	4050 1400 4450 1400
+	3800 1750 4200 1750
 Wire Wire Line
-	4450 1400 4450 1050
+	4200 1750 4200 1400
 Wire Wire Line
-	4050 1500 4550 1500
+	3800 1850 4300 1850
 Wire Wire Line
-	4550 1500 4550 1050
+	4300 1850 4300 1400
 $Comp
 L power:+5V #PWR?
 U 1 1 61A0E3EC
-P 5200 1050
-F 0 "#PWR?" H 5200 900 50  0001 C CNN
-F 1 "+5V" H 5215 1223 50  0000 C CNN
-F 2 "" H 5200 1050 50  0001 C CNN
-F 3 "" H 5200 1050 50  0001 C CNN
-	1    5200 1050
+P 4950 1400
+F 0 "#PWR?" H 4950 1250 50  0001 C CNN
+F 1 "+5V" H 4965 1573 50  0000 C CNN
+F 2 "" H 4950 1400 50  0001 C CNN
+F 3 "" H 4950 1400 50  0001 C CNN
+	1    4950 1400
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4750 1050 4750 1150
+	4500 1400 4500 1500
 Wire Wire Line
-	4750 1150 5200 1150
+	4500 1500 4950 1500
 Wire Wire Line
-	5200 1150 5200 1050
+	4950 1500 4950 1400
 $Comp
 L power:GNDREF #PWR?
 U 1 1 61A1B964
-P 4050 850
-F 0 "#PWR?" H 4050 600 50  0001 C CNN
-F 1 "GNDREF" H 4055 677 50  0001 C CNN
-F 2 "" H 4050 850 50  0001 C CNN
-F 3 "" H 4050 850 50  0001 C CNN
-	1    4050 850 
+P 3800 1200
+F 0 "#PWR?" H 3800 950 50  0001 C CNN
+F 1 "GNDREF" H 3805 1027 50  0001 C CNN
+F 2 "" H 3800 1200 50  0001 C CNN
+F 3 "" H 3800 1200 50  0001 C CNN
+	1    3800 1200
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4150 750  4050 750 
+	3900 1100 3800 1100
 Wire Wire Line
-	4050 750  4050 850 
+	3800 1100 3800 1200
 Wire Wire Line
 	8500 1550 9050 1550
 Wire Wire Line
 	10250 1550 10800 1550
 Wire Wire Line
 	8500 4250 9050 4250
-Text Label 1900 2600 2    50   ~ 0
+Text Label 1650 2950 2    50   ~ 0
 DIRAFadeur3
-Text Label 1900 2500 2    50   ~ 0
+Text Label 1650 2850 2    50   ~ 0
 DIRBFadeur3
-Text Label 1900 2400 2    50   ~ 0
+Text Label 1650 2750 2    50   ~ 0
 SpeedFadeur3
-Text Label 1900 1400 2    50   ~ 0
+Text Label 1650 1750 2    50   ~ 0
 ROT1A
-Text Label 4250 4000 0    50   ~ 0
+Text Label 4000 4350 0    50   ~ 0
 ROT1B
-Text Label 1850 3900 2    50   ~ 0
+Text Label 1600 4250 2    50   ~ 0
 ROT2A
-Text Label 1850 4000 2    50   ~ 0
-ROT2A
-Text Label 1900 1800 2    50   ~ 0
+Text Label 1600 4350 2    50   ~ 0
+ROT2B
+Text Label 1650 2150 2    50   ~ 0
 LED_RED
-Text Label 1900 1900 2    50   ~ 0
+Text Label 1650 2250 2    50   ~ 0
 LED_GREEN
-Text Label 1900 2000 2    50   ~ 0
+Text Label 1650 2350 2    50   ~ 0
 LED_BLUE
-Text Label 1850 3400 2    50   ~ 0
+Text Label 1600 3750 2    50   ~ 0
 Touch1
-Text Label 1850 3600 2    50   ~ 0
+Text Label 1600 3950 2    50   ~ 0
 Touch2
-Text Label 1850 3800 2    50   ~ 0
+Text Label 1600 4150 2    50   ~ 0
 Touch3
-Text Label 4250 3200 0    50   ~ 0
+Text Label 4000 3550 0    50   ~ 0
 POT1
-Text Label 4250 3300 0    50   ~ 0
+Text Label 4000 3650 0    50   ~ 0
 POT2
-Text Label 4250 3900 0    50   ~ 0
+Text Label 4000 4250 0    50   ~ 0
 POT3
 Wire Wire Line
-	2050 3100 1850 3100
+	1800 3450 1600 3450
 Wire Wire Line
-	2050 3200 1850 3200
+	1800 3550 1600 3550
 Wire Wire Line
-	2050 3900 1850 3900
+	1800 4250 1600 4250
 Wire Wire Line
-	4050 2700 4250 2700
+	3800 3050 4000 3050
 Wire Wire Line
-	4050 2600 4250 2600
+	3800 2950 4000 2950
 Wire Wire Line
-	4050 2500 4250 2500
+	3800 2850 4000 2850
 Wire Wire Line
-	4050 2400 4250 2400
+	3800 2750 4000 2750
 Wire Wire Line
-	4050 2300 4250 2300
+	3800 2650 4000 2650
 Wire Wire Line
-	4050 2200 4250 2200
+	3800 2550 4000 2550
 Wire Wire Line
-	4050 2100 4250 2100
+	3800 2450 4000 2450
 Wire Wire Line
-	4050 2000 4250 2000
+	3800 2350 4000 2350
 Wire Wire Line
-	4050 1900 4250 1900
+	3800 2250 4000 2250
 Wire Wire Line
-	4050 1800 4250 1800
+	3800 2150 4000 2150
 Wire Wire Line
-	4050 1700 4250 1700
+	3800 2050 4000 2050
 Wire Wire Line
-	4050 1600 4250 1600
-Text Label 4250 1900 0    50   ~ 0
+	3800 1950 4000 1950
+Text Label 4000 2250 0    50   ~ 0
 Button8
-Text Label 4250 2000 0    50   ~ 0
+Text Label 4000 2350 0    50   ~ 0
 Button7
-Text Label 4250 2100 0    50   ~ 0
+Text Label 4000 2450 0    50   ~ 0
 Button6
-Text Label 4250 2200 0    50   ~ 0
+Text Label 4000 2550 0    50   ~ 0
 Button5
-Text Label 4250 2300 0    50   ~ 0
+Text Label 4000 2650 0    50   ~ 0
 Button4
-Text Label 4250 2400 0    50   ~ 0
+Text Label 4000 2750 0    50   ~ 0
 Button3
-Text Label 4250 2500 0    50   ~ 0
+Text Label 4000 2850 0    50   ~ 0
 Button2
-Text Label 4250 2600 0    50   ~ 0
+Text Label 4000 2950 0    50   ~ 0
 Button1
-$Comp
-L Connector:Conn_01x05_Male J?
-U 1 1 61B72908
-P 2700 -800
-F 0 "J?" H 2808 -419 50  0000 C CNN
-F 1 "Conn_01x05_Male" H 2808 -510 50  0000 C CNN
-F 2 "" H 2700 -800 50  0001 C CNN
-F 3 "~" H 2700 -800 50  0001 C CNN
-	1    2700 -800
-	-1   0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x05_Male J?
-U 1 1 61B75949
-P 3200 -800
-F 0 "J?" H 3308 -419 50  0000 C CNN
-F 1 "Conn_01x05_Male" H 3308 -510 50  0000 C CNN
-F 2 "" H 3200 -800 50  0001 C CNN
-F 3 "~" H 3200 -800 50  0001 C CNN
-	1    3200 -800
-	1    0    0    -1  
-$EndComp
-Text Label 3550 -700 0    50   ~ 0
-Button8
-Text Label 3550 -800 0    50   ~ 0
-Button7
-Text Label 3550 -900 0    50   ~ 0
-Button6
-Text Label 3550 -1000 0    50   ~ 0
-Button5
-Text Label 2350 -700 2    50   ~ 0
-Button4
-Text Label 2350 -800 2    50   ~ 0
-Button3
-Text Label 2350 -900 2    50   ~ 0
-Button2
-Text Label 2350 -1000 2    50   ~ 0
-Button1
-Wire Wire Line
-	2350 -1000 2500 -1000
-Wire Wire Line
-	2350 -900 2500 -900
-Wire Wire Line
-	2350 -800 2500 -800
-Wire Wire Line
-	2350 -700 2500 -700
-Wire Wire Line
-	3550 -1000 3400 -1000
-Wire Wire Line
-	3550 -900 3400 -900
-Wire Wire Line
-	3550 -800 3400 -800
-Wire Wire Line
-	3550 -700 3400 -700
-$Comp
-L power:GNDREF #PWR?
-U 1 1 61C57769
-P 2400 -550
-F 0 "#PWR?" H 2400 -800 50  0001 C CNN
-F 1 "GNDREF" H 2405 -723 50  0001 C CNN
-F 2 "" H 2400 -550 50  0001 C CNN
-F 3 "" H 2400 -550 50  0001 C CNN
-	1    2400 -550
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GNDREF #PWR?
-U 1 1 61C58C60
-P 3500 -550
-F 0 "#PWR?" H 3500 -800 50  0001 C CNN
-F 1 "GNDREF" H 3505 -723 50  0001 C CNN
-F 2 "" H 3500 -550 50  0001 C CNN
-F 3 "" H 3500 -550 50  0001 C CNN
-	1    3500 -550
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2500 -600 2400 -600
-Wire Wire Line
-	2400 -600 2400 -550
-Wire Wire Line
-	3400 -600 3500 -600
-Wire Wire Line
-	3500 -600 3500 -550
-Text Label 1900 2300 2    50   ~ 0
+Text Label 1650 2650 2    50   ~ 0
 SpeedFadeur2
-Text Label 1900 2200 2    50   ~ 0
+Text Label 1650 2550 2    50   ~ 0
 DIRBFadeur2
-Text Label 1900 2100 2    50   ~ 0
+Text Label 1650 2450 2    50   ~ 0
 DIRAFadeur2
-Text Label 1900 1700 2    50   ~ 0
+Text Label 1650 2050 2    50   ~ 0
 SpeedFadeur1
-Text Label 1900 1600 2    50   ~ 0
+Text Label 1650 1950 2    50   ~ 0
 DIRBFadeur1
-Text Label 1900 1500 2    50   ~ 0
+Text Label 1650 1850 2    50   ~ 0
 DIRAFadeur1
-Text GLabel -1150 5150 0    50   Input ~ 0
+Text Label 1600 3650 2    50   ~ 0
 Slider1
-Text GLabel -1150 5250 0    50   Input ~ 0
+Text Label 1600 3850 2    50   ~ 0
 Slider2
-Text GLabel -1150 5350 0    50   Input ~ 0
+Text Label 1600 4050 2    50   ~ 0
 Slider3
-Text Label 1850 3300 2    50   ~ 0
+Text Label 2700 7450 0    50   ~ 0
+Button8
+Text Label 2700 6850 0    50   ~ 0
+Button7
+Text Label 2700 6250 0    50   ~ 0
+Button6
+Text Label 2700 5650 0    50   ~ 0
+Button5
+Text Label 1350 7450 0    50   ~ 0
+Button4
+Text Label 1350 6850 0    50   ~ 0
+Button3
+Text Label 1350 6250 0    50   ~ 0
+Button2
+Text Label 1350 5650 0    50   ~ 0
+Button1
+Text Label 3750 6200 3    50   ~ 0
+POT1
+Text Label 4400 6200 3    50   ~ 0
+POT2
+Text Label 5050 6200 3    50   ~ 0
+POT3
+Text Label 4250 7350 0    50   ~ 0
+ROT1A
+Text Label 4250 7150 0    50   ~ 0
+ROT1B
+Text Label 5400 7350 0    50   ~ 0
+ROT2A
+Text Label 5400 7150 0    50   ~ 0
+ROT2B
+Text Label 6200 1900 2    50   ~ 0
+SpeedFadeur1
+Text Label 6200 1700 2    50   ~ 0
+DIRBFadeur1
+Text Label 6200 1500 2    50   ~ 0
+DIRAFadeur1
+Text Label 6200 2500 2    50   ~ 0
+SpeedFadeur2
+Text Label 6200 2300 2    50   ~ 0
+DIRBFadeur2
+Text Label 6200 2100 2    50   ~ 0
+DIRAFadeur2
+Text Label 6200 4200 2    50   ~ 0
+DIRAFadeur3
+Text Label 6200 4400 2    50   ~ 0
+DIRBFadeur3
+Text Label 6200 4600 2    50   ~ 0
+SpeedFadeur3
+Text Label 9100 1250 0    50   ~ 0
+Touch1
+Text Label 10850 1250 0    50   ~ 0
+Touch2
+Text Label 9100 3950 0    50   ~ 0
+Touch3
+Text Label 8250 1300 3    50   ~ 0
 Slider1
-Text Label 1850 3500 2    50   ~ 0
+Text Label 10000 1300 3    50   ~ 0
 Slider2
-Text Label 1850 3700 2    50   ~ 0
+Text Label 8250 4000 3    50   ~ 0
 Slider3
+Text Label 9150 5900 2    50   ~ 0
+LED_RED
+Text Label 9150 5700 2    50   ~ 0
+LED_GREEN
+Text Label 9150 5500 2    50   ~ 0
+LED_BLUE
 $EndSCHEMATC
